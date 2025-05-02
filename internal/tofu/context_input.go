@@ -50,7 +50,7 @@ func (c *Context) Input(ctx context.Context, config *configs.Config, mode InputM
 	var diags tfdiags.Diagnostics
 	defer c.acquireRun("input")()
 
-	schemas, moreDiags := c.Schemas(config, nil)
+	schemas, moreDiags := c.Schemas(ctx, config, nil)
 	diags = diags.Append(moreDiags)
 	if moreDiags.HasErrors() {
 		return diags
