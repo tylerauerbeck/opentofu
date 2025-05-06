@@ -62,12 +62,11 @@ func (b *Backend) Workspaces(ctx context.Context) ([]string, error) {
 	return result, nil
 }
 
-func (b *Backend) DeleteWorkspace(name string, _ bool) error {
+func (b *Backend) DeleteWorkspace(ctx context.Context, name string, _ bool) error {
 	if name == backend.DefaultStateName || name == "" {
 		return fmt.Errorf("can't delete default state")
 	}
 
-	ctx := context.TODO()
 	client, err := b.armClient.getBlobClient(ctx)
 	if err != nil {
 		return err

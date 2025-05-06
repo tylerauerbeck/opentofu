@@ -1340,7 +1340,7 @@ func TestBackendExtraPaths(t *testing.T) {
 	}
 
 	// delete the real workspace
-	if err := b.DeleteWorkspace("s2", true); err != nil {
+	if err := b.DeleteWorkspace(t.Context(), "s2", true); err != nil {
 		t.Fatal(err)
 	}
 
