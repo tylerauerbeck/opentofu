@@ -82,8 +82,7 @@ func (b *Backend) DeleteWorkspace(name string, _ bool) error {
 	return nil
 }
 
-func (b *Backend) StateMgr(name string) (statemgr.Full, error) {
-	ctx := context.TODO()
+func (b *Backend) StateMgr(ctx context.Context, name string) (statemgr.Full, error) {
 	blobClient, err := b.armClient.getBlobClient(ctx)
 	if err != nil {
 		return nil, err

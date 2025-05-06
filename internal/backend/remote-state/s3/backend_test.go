@@ -1349,7 +1349,7 @@ func TestBackendExtraPaths(t *testing.T) {
 	}
 
 	// fetch that state again, which should produce a new lineage
-	s2Mgr, err := b.StateMgr("s2")
+	s2Mgr, err := b.StateMgr(t.Context(), "s2")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1373,7 +1373,7 @@ func TestBackendExtraPaths(t *testing.T) {
 	}
 
 	// make sure s2 is OK
-	s2Mgr, err = b.StateMgr("s2")
+	s2Mgr, err = b.StateMgr(t.Context(), "s2")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1407,7 +1407,7 @@ func TestBackendPrefixInWorkspace(t *testing.T) {
 	defer deleteS3Bucket(ctx, t, b.s3Client, bucketName)
 
 	// get a state that contains the prefix as a substring
-	sMgr, err := b.StateMgr("env-1")
+	sMgr, err := b.StateMgr(t.Context(), "env-1")
 	if err != nil {
 		t.Fatal(err)
 	}
