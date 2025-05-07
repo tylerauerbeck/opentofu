@@ -182,7 +182,7 @@ func (c *BuiltinEvalContext) Provider(addr addrs.AbsProviderConfig, key addrs.In
 	return pm[key]
 }
 
-func (c *BuiltinEvalContext) ProviderSchema(addr addrs.AbsProviderConfig) (providers.ProviderSchema, error) {
+func (c *BuiltinEvalContext) ProviderSchema(_ context.Context, addr addrs.AbsProviderConfig) (providers.ProviderSchema, error) {
 	return c.Plugins.ProviderSchema(addr.Provider)
 }
 
@@ -395,7 +395,7 @@ func (c *BuiltinEvalContext) EvaluateReplaceTriggeredBy(expr hcl.Expression, rep
 	// Since we have a traversal after the resource reference, we will need to
 	// decode the changes, which means we need a schema.
 	providerAddr := change.ProviderAddr
-	schema, err := c.ProviderSchema(providerAddr)
+	schema, err := c.ProviderSchema(context.TODO(), providerAddr)
 	if err != nil {
 		diags = diags.Append(err)
 		return nil, false, diags
